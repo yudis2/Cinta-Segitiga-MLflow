@@ -51,8 +51,10 @@ jobs:
           
       # Build Docker Model
       - name: Build Docker Model
+        env:
+          RUN_ID: ${{ steps.train_model.outputs.run_id }} 
         run: |
-          mlflow models build-docker --model-uri "runs:/$RUN_ID/model" --name "cc"
+          mlflow models build-docker --model-uri "runs:/$RUN_ID/model" --name "my-docker-hub-user/model-name"
 
       # Login to Docker Hub
       - name: Log in to Docker Hub
